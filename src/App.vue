@@ -10,7 +10,7 @@
       }}</v-toolbar-title>
       <drawer-items />
       <v-spacer></v-spacer>
-      <v-btn href="#" target="_blank" class="white" rounded elevation="0">
+      <v-btn href="#" class="white" rounded elevation="0">
         <span class="mr-2">Nombre negocio</span>
         <v-avatar color="teal white--text" size="30">H</v-avatar>
       </v-btn>
@@ -42,5 +42,6 @@ export default {
 <style>
 html {
   overflow: hidden;
+  box-sizing: border-box;
 }
 </style>

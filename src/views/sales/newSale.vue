@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex">
-    <v-navigation-drawer expand-on-hover permanent height="100vh" class="white">
+  <div style="height: 100%">
+    <v-navigation-drawer expand-on-hover permanent absolute class="white">
       <v-list>
         <v-list-item
           link
@@ -19,18 +19,51 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <div class="grey lighten-3" style="flex-grow: 1">Content page newSale</div>
+    <v-row class="new-sale-container" no-gutters>
+      <v-col cols="6" lg="8" class="pa-5">
+        <div class="d-flex">
+          <v-btn-toggle v-model="toggleSearchType" dense>
+            <v-btn color="blue accent-2" min-height="100%">
+              <v-icon class="white--text">mdi-magnify</v-icon>
+            </v-btn>
+
+            <v-btn color="blue accent-2" min-height="100%" class="rounded-r-0">
+              <v-icon class="white--text">mdi-barcode</v-icon>
+            </v-btn></v-btn-toggle
+          >
+          <v-autocomplete
+            placeholder="Buscar producto"
+            class="mr-2 text-h6 rounded-l-0 font-weight-regular"
+            background-color="white"
+            hide-details
+            outlined
+            dense
+            no-data-text="Sin resultados"
+            clearable
+            append-icon=""
+          ></v-autocomplete>
+          <v-btn
+            outlined
+            color="blue accent-2"
+            class="text-capitalize font-weight-regular"
+            >Nuevo producto
+            <v-icon class="ml-2">mdi-plus-box-multiple</v-icon></v-btn
+          >
+        </div>
+      </v-col>
+      <v-col cols="6" lg="4" class="cart-container">a</v-col>
+    </v-row>
 
     <v-bottom-navigation
       horizontal
       app
-      class="grey lighten-4 elevation-0 d-flex flex-column"
       max-height="49px"
+      class="elevation-0 d-flex flex-column"
+      style="border-top: 1px solid #ccc"
     >
-      <v-divider></v-divider>
       <v-tabs
         v-model="tab"
-        background-color="blue-grey lighten-5 "
+        background-color="grey lighten-3 "
         color="blue accent-2 "
         slider-size="3"
         show-arrows
@@ -62,12 +95,10 @@
         </v-tab>
         <v-btn
           icon
-          outlined
-          text
-          tile
-          class="elevation-0"
+          class="elevation-0 white"
           min-width="55px"
           @click="tabs++"
+          style="border: 1px solid #ccc !important"
           ><v-icon class="ma-0">mdi-plus</v-icon></v-btn
         >
       </v-tabs>
@@ -88,6 +119,7 @@ export default {
         { title: "Limpieza", avatar: "L", color: "blue-grey" },
         { title: "Fiambreria", avatar: "F", color: "red" },
       ],
+      toggleSearchType: 0,
     };
   },
 };
@@ -100,5 +132,17 @@ export default {
       top: 0;
     }
   }
+}
+
+.new-sale-container {
+  margin-left: 55px;
+  height: 100%;
+  background: #f4f5fb;
+}
+
+.cart-container {
+  min-height: 100%;
+  border-left: 1px solid #ccc;
+  background: #fff;
 }
 </style>
