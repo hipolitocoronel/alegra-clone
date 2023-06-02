@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 100%">
+  <div style="max-height: 100%">
     <v-navigation-drawer expand-on-hover permanent absolute class="white">
       <v-list>
         <v-list-item
@@ -71,6 +71,7 @@
             dense
             hide-details
             class="mr-2"
+            append-icon="mdi-chevron-down"
           >
             <template v-slot:prepend>
               <span class="grey--text text--darken-3">Cliente:</span>
@@ -93,15 +94,50 @@
             <p>Acá verás los productos que elijas para tu venta</p>
           </div>
 
-          <div class="cart-items"></div>
+          <div class="cart-items">
+            <v-list dense class="py-0">
+              <v-list-item
+                style="border-bottom: 1px solid #ddd"
+                v-for="n in 10"
+                :key="n"
+              >
+                <v-list-item-content class="pt-2">
+                  <v-list-item-title
+                    class="d-flex align-center text-subtitle-1"
+                  >
+                    Cepita <v-spacer></v-spacer>
+                    <v-btn
+                      fab
+                      x-small
+                      elevation="0"
+                      class="grey--text text--darken-2 mx-2"
+                      ><v-icon>mdi-plus</v-icon></v-btn
+                    >
+                    <span class="mx-2 font-weight-regular text-h6"> 1 </span>
+                    <v-btn
+                      fab
+                      x-small
+                      elevation="0"
+                      class="grey--text text--darken-2 mx-2 mr-6"
+                      ><v-icon>mdi-minus</v-icon></v-btn
+                    >
+                    $250,00
+                  </v-list-item-title>
+                  <v-list-item-subtitle class="button"
+                    >$250,00</v-list-item-subtitle
+                  >
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </div>
           <div class="cart-resume">Vender</div>
         </div>
       </v-col>
     </v-row>
 
     <v-bottom-navigation
-      horizontal
       app
+      horizontal
       max-height="49px"
       class="elevation-0 d-flex flex-column"
       style="border-top: 1px solid #ccc"
@@ -183,7 +219,7 @@ export default {
 
 .new-sale-container {
   margin-left: 55px;
-  height: 100%;
+  height: calc(100vh - 95px);
   background: #f4f5fb;
 }
 

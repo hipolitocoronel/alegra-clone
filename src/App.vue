@@ -17,7 +17,7 @@
     </v-app-bar>
     <drawer-items />
 
-    <v-main>
+    <v-main style="height: calc(100vh - 50px)">
       <router-view />
     </v-main>
   </v-app>
@@ -42,27 +42,12 @@ export default {
 </script>
 
 <style lang="scss">
-html {
+body {
   overflow: hidden;
   box-sizing: border-box;
 }
 
-$body-font-family: "Inter";
-
-.v-application {
-  .display-1,
-  .display-2,
-  .display-3,
-  .display-4,
-  .headline,
-  .title,
-  .subtitle-1,
-  .subtitle-2,
-  .body-1,
-  .body-2,
-  .caption,
-  .overline {
-    font-family: $body-font-family !important;
-  }
+* {
+  font-family: "Inter";
 }
 </style>
