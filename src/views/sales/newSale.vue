@@ -54,6 +54,14 @@
             <v-icon class="ml-2">mdi-plus-box-multiple</v-icon></v-btn
           >
         </div>
+        <v-row
+          class="my-7 mx-8"
+          justify="space-between"
+          no-gutters
+          style="gap: 20px"
+        >
+          <ProductItem v-for="n in 8" :key="n" />
+        </v-row>
       </v-col>
       <v-col cols="6" lg="4" class="cart-container">
         <div class="d-flex pa-3">
@@ -98,7 +106,7 @@
             <v-list dense class="py-0">
               <v-list-item
                 style="border-bottom: 1px solid #ddd"
-                v-for="n in 10"
+                v-for="n in 2"
                 :key="n"
               >
                 <v-list-item-content class="pt-2">
@@ -108,17 +116,19 @@
                     Cepita <v-spacer></v-spacer>
                     <v-btn
                       fab
+                      tile
                       x-small
                       elevation="0"
-                      class="grey--text text--darken-2 mx-2"
+                      class="grey--text text--darken-2 mx-2 rounded-lg"
                       ><v-icon>mdi-plus</v-icon></v-btn
                     >
                     <span class="mx-2 font-weight-regular text-h6"> 1 </span>
                     <v-btn
                       fab
                       x-small
+                      tile
                       elevation="0"
-                      class="grey--text text--darken-2 mx-2 mr-6"
+                      class="grey--text text--darken-2 mx-2 mr-6 rounded-lg"
                       ><v-icon>mdi-minus</v-icon></v-btn
                     >
                     $250,00
@@ -188,8 +198,11 @@
 </template>
 
 <script>
+import ProductItem from "@/components/newSale/ProductItem.vue";
+
 export default {
   name: "newSale",
+  components: { ProductItem },
   data() {
     return {
       tabs: 1,
