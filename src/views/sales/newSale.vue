@@ -64,6 +64,7 @@
         </v-row>
       </v-col>
       <v-col cols="6" lg="4" class="cart-container">
+        <!-- CABECERA CART -->
         <div class="d-flex pa-3">
           <span class="text-h6 font-weight-regular">Factura de venta</span>
           <v-spacer></v-spacer
@@ -72,6 +73,8 @@
           >
         </div>
         <v-divider></v-divider>
+
+        <!-- FILTRO CLIENTE  -->
         <div class="d-flex py-3 px-5">
           <v-autocomplete
             outlined
@@ -96,6 +99,8 @@
           </v-btn>
         </div>
         <v-divider></v-divider>
+
+        <!-- CUERPO CART -->
         <div class="cart-body grey lighten-5">
           <div class="empty-cart grey--text text-subtitle-1" v-show="!cart">
             <v-icon class="grey--text" x-large>mdi-basket-outline</v-icon>
@@ -140,7 +145,23 @@
               </v-list-item>
             </v-list>
           </div>
-          <div class="cart-resume">Vender</div>
+          <v-card class="cart-resume pa-5 pb-1 white">
+            <v-btn
+              dark
+              color="blue accent-2"
+              large
+              class="text-capitalize text-h6 font-weight-regular"
+              block
+              >Vender (F1)<v-spacer /> $500,00</v-btn
+            >
+            <div class="d-flex mt-2">
+              <span class="font-weight-medium grey--text">2 productos</span>
+              <v-spacer></v-spacer>
+              <v-btn text small class="text-capitalize body-2" color="red"
+                >Limpiar</v-btn
+              >
+            </div>
+          </v-card>
         </div>
       </v-col>
     </v-row>
@@ -237,18 +258,23 @@ export default {
 }
 
 .cart-container {
-  min-height: 100%;
   border-left: 1px solid #ccc;
   background: #fff;
+
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 96px);
 }
 
 .cart-body {
-  flex: 1;
-  position: relative;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 
-  justify-content: space-between;
+  position: relative;
+}
+.cart-items {
+  flex-grow: 1;
 }
 
 .empty-cart {

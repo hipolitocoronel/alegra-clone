@@ -1,6 +1,6 @@
 <template>
   <v-col class="product-container py-8 mx-auto mx-lg-0" cols="12" md="6" lg="4">
-    <v-icon style="font-size: 60px" class="grey--text text--lighten-1"
+    <v-icon style="font-size: 70px" class="grey--text text--lighten-1"
       >mdi-tag-text-outline</v-icon
     >
     <span class="grey lighten-5 blue--text caption px-2 py-1 rounded-lg">
