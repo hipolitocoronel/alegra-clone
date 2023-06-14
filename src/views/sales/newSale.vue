@@ -1,78 +1,83 @@
 <template>
   <div style="max-height: 100%">
-    <v-navigation-drawer expand-on-hover permanent absolute class="white">
-      <v-list>
-        <v-list-item
-          link
-          class="px-3"
-          v-for="category in categories"
-          :key="category.avatar"
-        >
-          <v-list-item-avatar class="my-0">
-            <v-avatar :color="category.color" size="33" class="white--text">{{
-              category.avatar
-            }}</v-avatar>
-          </v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title>{{ category.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-row class="new-sale-container" no-gutters>
-      <v-col cols="6" lg="8" class="pa-5">
-        <div class="d-flex align-center">
-          <v-btn-toggle v-model="toggleSearchType" dense>
-            <v-btn color="blue accent-2" min-height="40px">
-              <v-icon class="white--text">mdi-magnify</v-icon>
-            </v-btn>
+    <DrawerCategories />
 
-            <v-btn color="blue accent-2" min-height="40px" class="rounded-r-0">
-              <v-icon class="white--text">mdi-barcode</v-icon>
-            </v-btn></v-btn-toggle
-          >
-          <v-autocomplete
-            :search-input.sync="search"
-            placeholder="Buscar producto"
-            class="mr-2 text-h6 rounded-l-0 font-weight-regular"
-            background-color="white"
-            hide-details
-            outlined
-            dense
-            no-data-text="Sin resultados"
-            clearable
-            append-icon=""
-            :hide-no-data="!search ? true : false"
-          >
-          </v-autocomplete>
-          <v-btn
-            outlined
-            color="blue accent-2"
-            height="40px"
-            class="text-capitalize font-weight-regular align-self-center"
-            >Nuevo producto
-            <v-icon class="ml-2">mdi-plus-box-multiple</v-icon></v-btn
-          >
-        </div>
-        <v-row
-          class="my-7 mx-8"
-          justify="space-between"
-          no-gutters
-          style="gap: 20px"
+    <v-row class="new-sale-container" no-gutters>
+      <v-col
+        cols="6"
+        lg="8"
+        class="pa-5"
+        style="max-height: calc(100vh - 75px)"
+      >
+        <v-card
+          style="max-height: 100%; overflow-y: auto; background: transparent"
+          elevation="0"
+          class="products-list-container"
         >
-          <ProductItem v-for="n in 8" :key="n" />
-        </v-row>
+          <div class="d-flex align-center">
+            <v-btn-toggle v-model="toggleSearchType" dense>
+              <v-btn color="blue accent-2" min-height="40px">
+                <v-icon class="white--text">mdi-magnify</v-icon>
+              </v-btn>
+
+              <v-btn
+                color="blue accent-2"
+                min-height="40px"
+                class="rounded-r-0"
+              >
+                <v-icon class="white--text">mdi-barcode</v-icon>
+              </v-btn>
+            </v-btn-toggle>
+            <v-autocomplete
+              :search-input.sync="search"
+              placeholder="Buscar producto"
+              class="mr-2 text-h6 rounded-l-0 font-weight-regular"
+              background-color="white"
+              hide-details
+              outlined
+              dense
+              no-data-text="Sin resultados"
+              clearable
+              append-icon=""
+              :hide-no-data="!search ? true : false"
+            >
+            </v-autocomplete>
+            <v-btn
+              outlined
+              color="blue accent-2"
+              height="40px"
+              class="text-capitalize font-weight-regular align-self-center"
+            >
+              Nuevo producto
+              <v-icon class="ml-2">mdi-plus-box-multiple</v-icon>
+            </v-btn>
+          </div>
+
+          <v-row
+            class="my-7 mx-8"
+            justify="space-between"
+            no-gutters
+            style="gap: 20px; max-height: 100%"
+          >
+            <ProductItem
+              v-for="product in products"
+              :key="product.id"
+              :product="product"
+            />
+          </v-row>
+        </v-card>
       </v-col>
       <v-col cols="6" lg="4" class="cart-container">
         <!-- CABECERA CART -->
         <div class="d-flex pa-3">
           <span class="text-h6 font-weight-regular">Factura de venta</span>
-          <v-spacer></v-spacer
-          ><v-btn fab x-small elevation="0" class="grey--text text--darken-2"
-            ><v-icon>mdi-printer</v-icon></v-btn
-          >
+          <v-spacer />
+
+          <v-btn fab x-small elevation="0" class="grey--text text--darken-2">
+            <v-icon>mdi-printer</v-icon>
+          </v-btn>
         </div>
-        <v-divider></v-divider>
+        <v-divider />
 
         <!-- FILTRO CLIENTE  -->
         <div class="d-flex py-3 px-5">
@@ -98,7 +103,7 @@
             Nuevo
           </v-btn>
         </div>
-        <v-divider></v-divider>
+        <v-divider />
 
         <!-- CUERPO CART -->
         <div class="cart-body grey lighten-5">
@@ -118,15 +123,16 @@
                   <v-list-item-title
                     class="d-flex align-center text-subtitle-1"
                   >
-                    Cepita <v-spacer></v-spacer>
+                    Cepita <v-spacer />
                     <v-btn
                       fab
                       tile
                       x-small
                       elevation="0"
                       class="grey--text text--darken-2 mx-2 rounded-lg"
-                      ><v-icon>mdi-plus</v-icon></v-btn
                     >
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
                     <span class="mx-2 font-weight-regular text-h6"> 1 </span>
                     <v-btn
                       fab
@@ -134,17 +140,19 @@
                       tile
                       elevation="0"
                       class="grey--text text--darken-2 mx-2 mr-6 rounded-lg"
-                      ><v-icon>mdi-minus</v-icon></v-btn
                     >
+                      <v-icon>mdi-minus</v-icon>
+                    </v-btn>
                     $250,00
                   </v-list-item-title>
-                  <v-list-item-subtitle class="button"
-                    >$250,00</v-list-item-subtitle
-                  >
+                  <v-list-item-subtitle class="button">
+                    $250,00
+                  </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
           </div>
+
           <v-card class="cart-resume pa-5 pb-1 white">
             <v-btn
               dark
@@ -152,105 +160,56 @@
               large
               class="text-capitalize text-h6 font-weight-regular"
               block
-              >Vender (F1)<v-spacer /> $500,00</v-btn
             >
+              Vender (F1)
+              <v-spacer />
+              $500,00
+            </v-btn>
             <div class="d-flex mt-2">
               <span class="font-weight-medium grey--text">2 productos</span>
-              <v-spacer></v-spacer>
-              <v-btn text small class="text-capitalize body-2" color="red"
-                >Limpiar</v-btn
-              >
+              <v-spacer />
+              <v-btn text small class="text-capitalize body-2" color="red">
+                Limpiar
+              </v-btn>
             </div>
           </v-card>
         </div>
       </v-col>
     </v-row>
 
-    <v-bottom-navigation
-      app
-      horizontal
-      max-height="49px"
-      class="elevation-0 d-flex flex-column"
-      style="border-top: 1px solid #ccc"
-    >
-      <v-tabs
-        v-model="tab"
-        background-color="grey lighten-3 "
-        color="blue accent-2 "
-        slider-size="2"
-        show-arrows
-      >
-        <v-tab
-          class="grey--text text--darken-2 font-weight-regular text-capitalize"
-          v-for="n in tabs"
-          :key="n"
-          active-class="white"
-          ><v-hover v-slot="{ hover }">
-            <div>
-              <i
-                class="fi fi-sr-shopping-bag mr-3 text--accent-2"
-                :class="tab === n - 1 && ' blue--text'"
-              ></i>
-              {{ n === 1 ? "Venta principal" : `Venta ${n - 1}` }}
-
-              <v-btn
-                icon
-                min-width="30px"
-                class="ml-3"
-                small
-                :style="{ visibility: hover && n > 1 ? 'visible' : 'hidden' }"
-                @click="tabs--"
-                ><v-icon class="ma-0">mdi-delete</v-icon></v-btn
-              >
-            </div>
-          </v-hover>
-        </v-tab>
-        <v-btn
-          icon
-          class="elevation-0 white"
-          min-width="55px"
-          @click="tabs++"
-          style="border: 1px solid #ccc !important"
-          ><v-icon class="ma-0">mdi-plus</v-icon></v-btn
-        >
-      </v-tabs>
-    </v-bottom-navigation>
+    <FooterTabs />
+    <NewProductSimple />
   </div>
 </template>
 
 <script>
 import ProductItem from "@/components/newSale/ProductItem.vue";
+import DrawerCategories from "@/components/newSale/DrawerCategories.vue";
+import FooterTabs from "@/components/newSale/FooterTabs.vue";
+import productService from "@/services/product";
+import NewProductSimple from "@/components/products/newProductSimple.vue";
 
 export default {
   name: "newSale",
-  components: { ProductItem },
+  components: { ProductItem, DrawerCategories, FooterTabs, NewProductSimple },
   data() {
     return {
-      tabs: 1,
-      tab: 0,
       search: "",
       cart: [0],
-      categories: [
-        { title: "Aceites", avatar: "A", color: "teal" },
-        { title: "Gaseosas", avatar: "G", color: "amber" },
-        { title: "Limpieza", avatar: "L", color: "blue-grey" },
-        { title: "Fiambreria", avatar: "F", color: "red" },
-      ],
+      products: [],
+
       toggleSearchType: 0,
     };
+  },
+  async mounted() {
+    const data = await productService.getProducts();
+    this.products = data;
+
+    console.log("data: ", data);
   },
 };
 </script>
 <style lang="scss" scoped>
-.v-tabs {
-  ::v-deep {
-    .v-tabs-slider-wrapper {
-      transition: none;
-      top: 0;
-    }
-  }
-}
-
 .new-sale-container {
   margin-left: 55px;
   height: calc(100vh - 95px);
